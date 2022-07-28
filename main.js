@@ -1,4 +1,4 @@
-'use strict';
+import { watchApi } from "./monitoringModule/userAction"
 /**
 * @function main
 * @description 立即执行函数 
