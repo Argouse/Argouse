@@ -6,7 +6,10 @@ import { watchApi } from "./monitoringModule/userAction"
 * @author iiijr
 */
 (function() {
-  // 获取 script src 里的 query 参数
+
+  // TODO 获取token用于防止用户恶意传数据
+  // getToken()
+  // TODO 获取 script src 里的 query 参数
   const params = getScriptQuery();
   initSDK(params);
 })();
