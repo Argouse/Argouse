@@ -1,7 +1,2 @@
 node_modules
-/dist
 lib
-webpack.config.js
-index.html
-package.json
-package-lock.json
