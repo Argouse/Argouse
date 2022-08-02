@@ -1,11 +1,13 @@
-import { watchApi } from "./monitoringModule/userAction"
+import {watchApi} from "./monitoringModule/userAction"
+import {watchError} from "./monitoringModule/proxyError"
+
 /**
-* @function main
-* @description 立即执行函数 
-* @return void
-* @author iiijr
-*/
-(function() {
+ * @function main
+ * @description 立即执行函数 
+ * @return void
+ * @author iiijr
+ */
+(function () {
 
   // TODO 获取token用于防止用户恶意传数据
   // getToken()
@@ -16,20 +18,23 @@ import { watchApi } from "./monitoringModule/userAction"
 
 
 /**
-* @function initSDK
-* @description 初始化SDK 
-* @param opt {Map} 基础配置 
-* @return void
-* @author iiijr
-*/
+ * @function initSDK
+ * @description 初始化SDK 
+ * @param opt {Map} 基础配置 
+ * @return void
+ * @author iiijr
+ */
 function initSDK(opt) {
   // 内置默认参数
-  const config = assign({
+  const config = Object.assign({
     sendPV: true, // 是否上报页面 PV
     sendApi: true, // 是否上报 API 接口请求
     sendResource: true, // 是否上报资源请求
     sendError: true, // 是否上报 js error
     sendPerf: true, // 是否上报页面性能
+
+    reportUrl: "/report?key=114514", //上报地址
+    openErrorLog: true //开启错误监控日志
     // TODO 写了一部分模块，待补充，写模块的时候大伙们顺便添加上去
   }, opt);
 
@@ -41,11 +46,28 @@ function initSDK(opt) {
   config.sendPerf && watchPerf();
 
   // TODO 自定义日志上报
-  watchCustom(); 
+  watchCustom();
 }
 
+/**
+ * 仅是确保正常运行
+ */
+function getScriptQuery() {
+  return {
+    sendPV: false, // 是否上报页面 PV
+    sendApi: true, // 是否上报 API 接口请求
+    sendResource: false, // 是否上报资源请求
+    sendError: true, // 是否上报 js error
+    sendPerf: false, // 是否上报页面性能
 
+    reportUrl: "", //错误上报地址，因为接口还没完成现在填入url会出现不必要的接口异常
+    openErrorLog: true //开启错误监控日志
+  }
+}
 
+/**
+ * 仅是确保正常运行
+ */
+function watchCustom() {
 
-
-
+}
