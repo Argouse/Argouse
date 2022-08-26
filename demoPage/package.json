@@ -1,0 +1,20 @@
+{
+  "name": "demopage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run lite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cnpm": "^8.2.0"
+  },
+  "devDependencies": {
+    "lite-server": "^2.5.4",
+    "live-server": "^1.2.2"
+  }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>native-js-demo</title>
+    <script>
+      window.epimetheus = "114514";
+      window.reportId = "114514";
+    </script>
+    <script src="http://localhost:8080/bundle.js" id="Argouse" async></script>
+    <!-- <script src="/distBrowser/browser.min.js"></script> -->
+    <script></script>
+</head>
+
+<body>
+    <h1>native-js:控制台输出信息调试</h1>
+    <button id="codeErr" onclick="codeError()">代码错误</button>
+    <button id="normalReq" onclick="onClickXhrNormal()">xhr正常请求</button>
+    <button id="exceptionReq" onclick="onClickXhrError()">xhr异常请求</button>
+    <button id="normalFetch" onclick="onClickNativeFetch()">Fetch正常请求</button>
+    <button id="exceptionFetch" onclick="onClickNativeErrorFetch()">Fetch异常请求</button>
+    <button id="logUpload" onclick="mitoLog()">log上报</button>
+    <button id="promiseError" onclick="promiseError()">promiseError</button>
+    <button id="hashChange" onclick="hashChange()">改变hash</button>
+    <button onclick="testReplaceState()">测试replaceState</button>
+    <button onclick="testPushState()">测试pushState</button>
+    <button onclick="testHistoryBack()">测试testHistoryBack</button>
+    <button onclick="testHistoryForward()">测试testHistoryForward</button>
+    <button onclick="testAddHash()">测试添加hash</button>
+    <script>
+        function codeError() {
+            let a = {}
+            a.split('/')
+        }
+
+        function promiseError() {
+            const promiseWrap = () => new Promise((resolve, reject) => {
+                reject('promise reject')
+            })
+            promiseWrap().then(res => {
+                console.log('res', res)
+            })
+
+        }
+
+        function mitoLog() {
+            MITO.log({
+                message: {
+                    one: 111
+                },
+                tag: '测试'
+            })
+        }
+
+        function hashChange() {
+            window.location.hash = 'xxx'
+        }
+
+        function onClickNativeFetch() {
+            fetch('/normal/post', {
+                method: 'POST',
+                body: JSON.stringify({
+                    test: '测试请求体'
+                }),
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
+                res.text().then((res) => console.log('res', res))
+            })
+        }
+
+        function onClickNativeErrorFetch() {
+            fetch('/exception/post', {
+                method: 'POST',
+                body: JSON.stringify({
+                    test: '测试请求体'
+                }),
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(
+                (res) => {
+                    res.text().then((res) => console.log('res', res))
+                },
+                (err) => {
+                    console.log('err', err)
+                }
+            )
+        }
+
+        function onClickXhrNormal() {
+            console.log('12312')
+            const xhr = new XMLHttpRequest()
+            xhr.open('get', '/normal')
+            xhr.setRequestHeader('content-type', 'application/json')
+            xhr.send()
+            console.log(xhr.readyState)
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.responseText)
+                }
+            }
+        }
+
+        function onClickXhrError() {
+            const xhr = new XMLHttpRequest()
+            xhr.open('get', '/exception')
+            xhr.setRequestHeader('content-type', 'application/json')
+            xhr.send()
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.responseText)
+                }
+            }
+        }
+                
+        function testPushState() {
+          console.log("testPushState")
+          const stateObj = { foo: "pushBar" };
+          history.pushState(stateObj, "page 1", "pushBar.html");
+          
+        }
+        function testReplaceState() {
+          console.log("testReplaceState")
+          const stateObj = { foo: "replaceBar" };
+          history.replaceState(stateObj, "page 2", "replaceBar.html");
+        }
+        function testHistoryBack() {
+          history.back()
+        }
+        function testHistoryForward() {
+          history.forward()
+        }
+        function testAddHash() {
+          window.location.hash = 'xxxxxx'
+        }
+    </script>
+</body>
+
+</html>
