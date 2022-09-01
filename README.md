@@ -51,7 +51,7 @@
 ## 特性
 监控数据
 - sendPV: 
-  - 页面PV/UV
+  - 页面UV
   - 用户页面停留时长
 - sendApi: 
   - http请求链路
