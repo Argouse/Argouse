@@ -71,4 +71,10 @@
 - sendDom: 
   - 屏幕录制和回放功能
 
+## 演示数据
+![grafana_img_1](doc/demo/grafana_1.jpg)
+![grafana_img_2](doc/demo/grafana_2.jpg)
+![grafana_img_3](doc/demo/grafana_3.jpg)
+![grafana_img_4](doc/demo/grafana_4.jpg)
+![grafana_img_5](doc/demo/grafana_5.jpg)
 
